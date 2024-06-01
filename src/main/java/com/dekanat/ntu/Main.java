@@ -20,8 +20,8 @@ import java.nio.file.StandardCopyOption;
 
 public class Main {
 
-    private static final String VERSION_URL = "http://212.111.203.173/version-info";
-    private static final String UPDATE_URL = "http://212.111.203.173/download";
+    private static final String VERSION_URL = "http://212.111.203.173/download";
+    private static final String UPDATE_URL = "http://212.111.203.173//download-update";
     private static final String LOCAL_VERSION_FILE = "C:\\Program Files (x86)\\Dekanat\\version.json";
     private static final String UPDATE_DIR = "C:\\Program Files (x86)\\Dekanat\\";
 
