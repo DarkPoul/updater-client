@@ -22,17 +22,20 @@ public class Main {
 
     private static final String VERSION_URL = "http://212.111.203.173/version-info";
     private static final String UPDATE_URL = "http://212.111.203.173/download";
-    private static final String LOCAL_VERSION_FILE = "C:\\Users\\poulp\\Downloads\\version.json";
-    private static final String UPDATE_DIR = "C:\\Users\\poulp\\Downloads\\";
+    private static final String LOCAL_VERSION_FILE = "C:\\Program Files (x86)\\Dekanat\\version.json";
+    private static final String UPDATE_DIR = "C:\\Program Files (x86)\\Dekanat\\";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println("Start");
         System.out.println(readRemoteVersion());
         System.out.println(readLocalVersion());
 
         if (!readRemoteVersion().equals(readLocalVersion())) {
             downloadUpdate(readRemoteVersion());
+
         }
+
+        runDekanat();
 
     }
 
@@ -56,7 +59,7 @@ public class Main {
         connection.setRequestMethod("GET");
         connection.connect();
         InputStream in = connection.getInputStream();
-        Files.copy(in, Paths.get(UPDATE_DIR + "update.zip"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(in, Paths.get(UPDATE_DIR + "Dekanat.exe"), StandardCopyOption.REPLACE_EXISTING);
         in.close();
         connection.disconnect();
         System.out.println("Downloaded successfully");
@@ -84,6 +87,16 @@ public class Main {
         System.out.println("Файл version.json успішно оновлено!");
 
 
+    }
+
+    private static void runDekanat() throws IOException, InterruptedException {
+        String exeFileName = "Dekanat.exe";
+        String currentDir = System.getProperty("user.dir");
+        String exeFilePath = currentDir + File.separator + exeFileName;
+        ProcessBuilder processBuilder = new ProcessBuilder(exeFilePath);
+        Process process = processBuilder.start();
+        int exitCode = process.waitFor();
+        System.out.println("Виконання завершено з кодом: " + exitCode);
     }
 
 
